@@ -1,12 +1,21 @@
 import React from 'react';
-import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, ActivityIndicator, Button } from 'react-native';
 
 const EmptyStateScreen = props => {
     return (
         <View style={styles.screen}>
-            <ActivityIndicator
-                animating={true} color={'#01f'}
-                size={'large'} />
+            <View style={styles.textWrapper}>
+                <Text style={styles.text}>
+                    Something Went Wrong
+               </Text>
+            </View>
+            <View style={styles.buttonWrapper}>
+                <Button
+                    title={'Retry'}
+                    onPress={props.onPress}
+                />
+            </View>
+
         </View>
     )
 }
@@ -16,6 +25,19 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    textWrapper: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    buttonWrapper: {
+        flex: 1,
+        justifyContent: 'flex-start',
+        alignItems: 'center'
+    },
+    text: {
+        fontSize: 20
     }
 });
 
