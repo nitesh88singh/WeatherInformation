@@ -1,5 +1,2 @@
-export default {
-    error: 'Something Went Wrong',
-    weekDays: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-
-}
+export const ERROR = 'Something Went Wrong';
+export const FORECASTE_EMPTY = 'WEATHER FORECAST LIST IS EMPTY';

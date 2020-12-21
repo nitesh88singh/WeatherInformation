@@ -1,13 +1,7 @@
+import moment from 'moment';
+import { API_KEY, GET_WEATHER_API } from "../../Constants/ApiConstants";
 
 export const WEATHER_INFO_LIST = "WEATHER_INFO_LIST";
-export const CURRENT_POSITION = "CURRENT_POSITION";
-
-export const storeCurrentPosition = (location) => {
-    return {
-        type: CURRENT_POSITION,
-        location
-    }
-}
 
 export const addWeatherInfo = (data) => {
     return {
@@ -15,20 +9,24 @@ export const addWeatherInfo = (data) => {
         data
     }
 }
-export const fetchWaetherInfoList = () => {
+export const fetchWaetherInfoList = (latLong) => {
     return async (dispatch, getState) => {
-        console.log('weather', getState())
         let data = [];
+        let lat = latLong.latitude;
+        let long = latLong.longitude;
         try {
-            let response = await fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${getState().weatherInfo.latLong.latitude}&lon=${getState().weatherInfo.latLong.longitude}&appid=89995ff8dea1a3b5bad95afb5c65d031&units=metric`);
+            let response = await fetch(
+                `${GET_WEATHER_API}?lat=${lat}&lon=${long}&appid=${API_KEY}&units=metric`
+            );
+            console.log("1111", response, latLong)
             if (response.status === 200) {
                 let weatherData = await response.json();
                 console.log("44444", weatherData)
                 let previous_date = '';
                 weatherData.list.forEach((value, index) => {
                     let dt_txt = value['dt_txt'];
-                    let date = new Date(dt_txt);
-                    let current_date = date.getDate();
+                    let date = moment(dt_txt, "YYYY-MM-DD HH:mm:ss").format('dddd');
+                    let current_date = date;
                     if (current_date != previous_date) {
                         data.push(value);
                     }
@@ -39,6 +37,9 @@ export const fetchWaetherInfoList = () => {
                     data
                 })
                 return await response.json();
+            }
+            else {
+                throw 'Server Problem Please Wait ..';
             }
         } catch (err) {
             let error = null;

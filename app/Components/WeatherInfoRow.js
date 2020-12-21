@@ -21,21 +21,19 @@ const WeatherInfoRow = props => {
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
         flexDirection: 'row',
         elevation: 1,
         margin: 1,
         backgroundColor: '#f4f4f4'
+
     },
     dayWrapper: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
     },
     dayText: {
         fontSize: 20,
-        fontWeight: "bold"
+        textAlign: 'center',
+        textAlignVertical: 'center'
     },
     tempWrapper: {
         flex: 1,
